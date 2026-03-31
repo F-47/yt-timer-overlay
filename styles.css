@@ -1,0 +1,92 @@
+#yt-timer-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 51;
+  pointer-events: none;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  transition: opacity 0.15s ease;
+}
+
+#movie_player:not(.ytp-autohide) #yt-timer-overlay {
+  opacity: 0;
+}
+
+.yt-pill-text,
+.yt-ring-wrap {
+  display: none;
+}
+
+#yt-timer-overlay[data-style="pill"] .yt-pill-text {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-family: "YouTube Sans", "Roboto", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  line-height: 1;
+  padding: 6px 11px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+#yt-timer-overlay[data-style="ring"] .yt-ring-wrap {
+  display: block;
+}
+
+.yt-ring-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.yt-ring-wrap svg {
+  display: block;
+  transform: rotate(-90deg);
+}
+
+.yt-ring-disk {
+  fill: rgba(0, 0, 0, 0.62);
+}
+
+.yt-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 5;
+}
+
+.yt-ring-progress {
+  fill: none;
+  stroke: #ff4e4e;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.45s linear;
+}
+
+.yt-ring-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  font-family: "YouTube Sans", "Roboto", Arial, sans-serif;
+  line-height: 1.25;
+}
+
+.yt-ring-current {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.yt-ring-total {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.65;
+  letter-spacing: 0.2px;
+}

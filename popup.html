@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Timer Overlay</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 260px;
+        background: #0f0f0f;
+        color: #fff;
+        font-family: "YouTube Sans", "Roboto", Arial, sans-serif;
+        padding: 20px 18px 22px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        background: #ff4e4e;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      h1 {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        color: #fff;
+      }
+
+      .section-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .shortcut-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .shortcut-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .shortcut-desc {
+        font-size: 12px;
+        color: #ccc;
+        line-height: 1.3;
+      }
+
+      .keys {
+        display: flex;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+
+      kbd {
+        display: inline-block;
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-bottom-width: 2px;
+        border-radius: 4px;
+        padding: 3px 7px;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 1.3;
+      }
+
+      .divider {
+        height: 1px;
+        background: #1f1f1f;
+        margin-bottom: 16px;
+      }
+
+      .cycle-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+
+      .cycle-item {
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 6px;
+        padding: 8px 10px;
+      }
+
+      .cycle-num {
+        font-size: 9px;
+        font-weight: 700;
+        color: #ff4e4e;
+        letter-spacing: 0.5px;
+        margin-bottom: 3px;
+      }
+
+      .cycle-name {
+        font-size: 11px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 1px;
+      }
+
+      .cycle-sub {
+        font-size: 10px;
+        color: #666;
+      }
+
+      .footer {
+        font-size: 10px;
+        color: #444;
+        text-align: center;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="dot"></div>
+      <h1>YouTube Timer Overlay</h1>
+    </div>
+
+    <p class="section-label">Keyboard Shortcuts</p>
+
+    <div class="shortcut-list">
+      <div class="shortcut-row">
+        <span class="shortcut-desc">Toggle overlay on / off</span>
+        <div class="keys"><kbd>Y</kbd></div>
+      </div>
+      <div class="shortcut-row">
+        <span class="shortcut-desc">Cycle through styles &amp; modes</span>
+        <div class="keys"><kbd>Shift</kbd><kbd>Y</kbd></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="section-label">Style Cycle (Shift + Y)</p>
+
+    <div class="cycle-grid">
+      <div class="cycle-item">
+        <div class="cycle-num">① PILL</div>
+        <div class="cycle-name">Elapsed</div>
+        <div class="cycle-sub">01:23 / 10:45</div>
+      </div>
+      <div class="cycle-item">
+        <div class="cycle-num">② RING</div>
+        <div class="cycle-name">Elapsed</div>
+        <div class="cycle-sub">Arc + timer</div>
+      </div>
+      <div class="cycle-item">
+        <div class="cycle-num">③ GHOST</div>
+        <div class="cycle-name">Elapsed</div>
+        <div class="cycle-sub">Text shadow</div>
+      </div>
+      <div class="cycle-item">
+        <div class="cycle-num">④ PILL</div>
+        <div class="cycle-name">Remaining</div>
+        <div class="cycle-sub">-09:22 / 10:45</div>
+      </div>
+      <div class="cycle-item">
+        <div class="cycle-num">⑤ RING</div>
+        <div class="cycle-name">Remaining</div>
+        <div class="cycle-sub">Arc + countdown</div>
+      </div>
+      <div class="cycle-item">
+        <div class="cycle-num">⑥ GHOST</div>
+        <div class="cycle-name">Remaining</div>
+        <div class="cycle-sub">Text shadow</div>
+      </div>
+    </div>
+
+    <p class="footer">Works on all YouTube videos &amp; fullscreen</p>
+  </body>
+</html>
