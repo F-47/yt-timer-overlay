@@ -32,6 +32,10 @@ Pressing `Shift + Y` cycles through 4 styles:
 3. Enable **Developer mode** (top right)
 4. Click **Load unpacked** and select the project folder
 
+## Privacy
+
+This extension collects no user data whatsoever. It only reads YouTube video playback time locally in your browser to display the timer overlay. No data is stored, transmitted, or shared with any third party.
+
 ## License
 
 MIT — see [LICENSE](LICENSE)
