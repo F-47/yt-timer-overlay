@@ -3,9 +3,19 @@
   "name": "YouTube Timer Overlay",
   "version": "1.0.0",
   "description": "Persistent playback timer overlay for YouTube videos. Y: toggle, Shift+Y: cycle styles (pill / ring, elapsed / remaining).",
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "YouTube Timer Overlay"
+    "default_title": "YouTube Timer Overlay",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "content_scripts": [
     {
