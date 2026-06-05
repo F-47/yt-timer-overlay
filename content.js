@@ -96,7 +96,7 @@
   }
 
   function attachOverlay() {
-    const player = document.querySelector('#movie_player');
+    const player = video?.closest('#movie_player') || document.querySelector('#movie_player');
     if (!player) return;
     if (overlay && overlay.parentNode === player) return;
     if (!overlay) overlay = createOverlay();
@@ -108,7 +108,7 @@
     if (!video || !overlay) return;
 
     const current  = video.currentTime;
-    const duration = video.duration;
+    const duration = getDuration(video);
     const { shape, mode } = currentStyle();
     const rem = mode === 'remaining';
 
@@ -145,6 +145,7 @@
     rafId = requestAnimationFrame(loop);
     if (timestamp - lastTick < 500) return;
     lastTick = timestamp;
+    findAndAttach();
     updateOverlay();
   }
 
@@ -152,9 +153,40 @@
     if (rafId === null) rafId = requestAnimationFrame(loop);
   }
 
+  function getDuration(vid) {
+    if (Number.isFinite(vid.duration) && vid.duration > 0) return vid.duration;
+
+    if (vid.seekable?.length) {
+      const end = vid.seekable.end(vid.seekable.length - 1);
+      if (Number.isFinite(end) && end > 0) return end;
+    }
+
+    return NaN;
+  }
+
+  function videoScore(vid) {
+    let score = 0;
+    if (vid.closest('#movie_player')) score += 100;
+    if (vid.classList.contains('html5-main-video')) score += 50;
+    if (!vid.paused && !vid.ended) score += 40;
+    if (vid.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) score += 20;
+    if (Number.isFinite(vid.currentTime) && vid.currentTime > 0) score += 10;
+
+    const rect = vid.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) score += 20;
+    return score;
+  }
+
+  function findActiveVideo() {
+    const videos = [...document.querySelectorAll('video')];
+    if (!videos.length) return null;
+    return videos.reduce((best, candidate) =>
+      videoScore(candidate) > videoScore(best) ? candidate : best
+    );
+  }
+
   function findAndAttach() {
-    const vid = document.querySelector('video.html5-main-video')
-             || document.querySelector('video');
+    const vid = findActiveVideo();
     if (!vid) return false;
     video = vid;
     attachOverlay();
@@ -163,19 +195,18 @@
   }
 
   function watchForVideo() {
-    if (domObserver) domObserver.disconnect();
+    if (domObserver) return;
     domObserver = new MutationObserver(() => {
-      if (findAndAttach()) {
-        domObserver.disconnect();
-        domObserver = null;
-      }
+      findAndAttach();
     });
     domObserver.observe(document.documentElement, { childList: true, subtree: true });
   }
 
   function init() {
     video = null;
-    if (!findAndAttach()) watchForVideo();
+    findAndAttach();
+    watchForVideo();
+    startLoop();
   }
 
   function onKeydown(e) {
